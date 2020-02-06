@@ -11,11 +11,10 @@ class Scraper
         details = doc.css("div.clearFix div.categoryContainer div.category.clearFix")
         details.each do |category|
             category_hash = {
-                :name => category.css("a h4.category__copy").text,
+                :category => category.css("a h4.category__copy").text,
                 :url => category.css("a").attribute("href").value,
                 :winner_image => category.css("div.category__winnerImageContainer img").attribute("src").value 
             }
-            binding.pry 
             categories << category_hash 
         end 
 
