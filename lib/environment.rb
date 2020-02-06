@@ -1,4 +1,4 @@
-require "goodreads/version"
+require_relative "./goodreads/version"
 require 'pry'
 require 'open-uri'
 require 'nokogiri'
