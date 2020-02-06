@@ -2,10 +2,10 @@ require_relative "./goodreads/version"
 require 'pry'
 require 'open-uri'
 require 'nokogiri'
+
 require_relative './book'
 require_relative './controller'
 require_relative './scraper'
-# require_relative './goodreads/version'
 
 
 module Goodreads
