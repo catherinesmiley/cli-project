@@ -45,9 +45,11 @@ class Goodreads::Controller
     end 
 
     def winner 
+        puts "The big winner is..."
     end 
 
     def nominees
+        puts "They were so close! Here are the nominees:"
     end 
 
     def quit 

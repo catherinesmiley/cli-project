@@ -15,6 +15,7 @@ class Scraper
                 :url => category.css("a").attribute("href").value,
                 :winner_image => category.css("div.category__winnerImageContainer img").attribute("src").value 
             }
+            binding.pry 
             categories << category_hash 
         end 
 
