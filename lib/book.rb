@@ -1,8 +1,12 @@
 class Goodreads::Book
 
-    attr_accessor :category_name, :url, :winner_image, :title, :author, :description, :votes
+    attr_accessor :title, :author, :release_date, :giveaway_details
 
     @@all = [] 
+
+    def initialize
+        @@all << self 
+    end 
 
     def self.all 
         @@all 
