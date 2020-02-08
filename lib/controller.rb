@@ -1,19 +1,58 @@
 class Goodreads::Controller
 
+    attr_accessor :current_book 
+
     def run 
-        welcome 
-        list_giveaways
-        choose_book
-        # get_book_details
+        create_books 
+        welcome  
+        instructions 
+        user_interaction
         quit 
+    end 
+
+    def create_books 
+
     end 
 
     def welcome
         puts "Welcome to the Goodreads Fiction Giveaways App!"
     end 
 
-    def list_giveaways
+    def instructions 
         puts "Discover all current fiction giveaways on Goodreads."
+        puts "Type list for the full list of giveaways."
+        puts "Type the book number (1-30) to select a book giveaway."
+        puts "----------------------"
+        puts "After you've selected a book number:"
+        puts "Type author for the author's name."
+        puts "Type release date for the book's release date."
+        puts "Type details for the giveeaway details and book summary."
+        puts "Type quit any time you want to quit the program."
+    end 
+
+    def user_interaction
+        input = nil 
+        while input != "quit" 
+            input = gets.strip 
+            if input == "list"
+                list_giveaways 
+            elsif input.to_i.between?(1,30)
+                find_book_by_number 
+            elsif input == "author"
+                puts "Author name"
+            elsif input == "release date"
+                puts "Release Date"
+            elsif input == "details"
+                puts "Giveaway details and book summary"
+            elsif input == "quit"
+                quit 
+            else 
+                error_message
+            end 
+        end 
+    end 
+
+    def list_giveaways
         puts "Here's the full list by book title:"
         puts <<-DOC
             1. The Orphan Collector
@@ -22,50 +61,29 @@ class Goodreads::Controller
         DOC
     end
 
-    def choose_book
-        input = nil
+    def find_book_by_number
+        input = nil 
         while input != "quit"
-            puts "Enter the number of the giveaway for more details. Type list to see the full giveaway list again. Type quit to quit the program."
             input = gets.strip 
-            case input
-            when "1"
-                puts "The Orphan Collector: type author for this book's author, type release date for this book's release date, or type details for this book's giveaway details and summary."
-            when "2"
-                puts "Above the Bay of Angels: type author for this book's author, type release date for this book's release date, or type details for this book's giveaway details and summary."
-            when "3"
-                puts "Good Citizens Need Not Fear: Stories: type author for this book's author, type release date for this book's release date, or type details for this book's giveaway details and summary."
-            when "list"
-                list_giveaways
+            if (1..Book.all.length).include?(input.to_i)
+                current_book = Book.all[input.to_i-1]
+                puts "Book Title"
+            elsif input == "quit"
+                quit 
             else 
-                # replace with error
-                puts "Sorry, I don't know what you're looking for! Please try again!"
+                error_message
             end 
         end 
     end 
 
-    # def get_book_details
-    #     input = nil
-    #     while input != "quit"
-    #         puts "Enter the number of the giveaway for more details. Type list to see the full giveaway list again. Type quit to quit the program."
-    #         input = gets.strip 
-    #         case input
-    #         when "author"
-    #             puts "Author name"
-    #         when "2"
-    #             puts "release date"
-    #         when "3"
-    #             puts "details"
-    #         when "list"
-    #             list_giveaways
-    #         else 
-    #             # replace with error
-    #             puts "Sorry, I don't know what you're looking for! Please try again!"
-    #         end 
-    #     end 
-    # end 
+    def error_message
+        puts "Sorry, I don't know what you're looking for! Please try again!"
+        user_interaction 
+    end 
 
     def quit 
-        puts "You have quit the program. Goodbye!"
+        puts "You have quit the program. Goodbye!"  
+        quit 
     end 
 
 end 
