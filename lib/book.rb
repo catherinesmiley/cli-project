@@ -1,11 +1,21 @@
 class Goodreads::Book
+# class Book 
 
     attr_accessor :title, :author, :release_date, :giveaway_details
 
     @@all = [] 
 
-    def initialize
+    def initialize(book_hash)
+        book_hash.each do |key, value|
+            self.send "#{key}=", value
+        end 
         @@all << self 
+    end 
+
+    def create_from_site(book_array)
+        book_array.each do |book|
+            self.new(book)
+        end 
     end 
 
     def self.all 

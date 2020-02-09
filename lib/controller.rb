@@ -1,4 +1,5 @@
 class Goodreads::Controller
+# class Controller 
 
     attr_accessor :current_book 
 
@@ -11,7 +12,8 @@ class Goodreads::Controller
     end 
 
     def create_books 
-
+        book_array = Scraper.scrape_fiction_giveaway
+        Book.create_from_site(book_array)
     end 
 
     def welcome
@@ -37,7 +39,9 @@ class Goodreads::Controller
             if input == "list"
                 list_giveaways 
             elsif input.to_i.between?(1,30)
+                input = current_book
                 find_book_by_number 
+                more_instructions 
             elsif input == "author"
                 puts "Author name"
             elsif input == "release date"
@@ -65,15 +69,10 @@ class Goodreads::Controller
         input = nil 
         while input != "quit"
             input = gets.strip 
-            if (1..Book.all.length).include?(input.to_i)
-                current_book = Book.all[input.to_i-1]
-                puts "Book Title"
-            elsif input == "quit"
-                quit 
-            else 
-                error_message
-            end 
-        end 
+
+    end 
+
+    def more_instructions
     end 
 
     def error_message
