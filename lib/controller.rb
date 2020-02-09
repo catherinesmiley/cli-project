@@ -69,6 +69,7 @@ class Goodreads::Controller
         input = nil 
         while input != "quit"
             input = gets.strip 
+        end 
 
     end 
 
