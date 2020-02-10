@@ -75,7 +75,7 @@ class Goodreads::Controller
 
     def quit 
         puts "You have quit the program. Goodbye!"  
-        # quit 
+        exit
     end 
 
 end 
