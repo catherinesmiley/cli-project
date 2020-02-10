@@ -1,5 +1,4 @@
-class Goodreads::Book
-# class Book 
+class Goodreads::Book 
 
     attr_accessor :title, :author, :release_date, :giveaway_details
 

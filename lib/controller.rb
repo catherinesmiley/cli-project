@@ -1,5 +1,4 @@
 class Goodreads::Controller
-# class Controller 
 
     attr_accessor :current_book 
 
@@ -12,8 +11,9 @@ class Goodreads::Controller
     end 
 
     def create_books 
-        book_array = Scraper.scrape_fiction_giveaway
-        Book.create_from_site(book_array)
+        binding.pry 
+        book_array = Goodreads::Scraper.scrape_fiction_giveaway
+        Goodreads::Book.create_from_site(book_array)
     end 
 
     def welcome
@@ -23,31 +23,18 @@ class Goodreads::Controller
     def instructions 
         puts "Discover all current fiction giveaways on Goodreads."
         puts "Type list for the full list of giveaways."
-        puts "Type the book number (1-30) to select a book giveaway."
-        puts "----------------------"
-        puts "After you've selected a book number:"
-        puts "Type author for the author's name."
-        puts "Type release date for the book's release date."
-        puts "Type details for the giveeaway details and book summary."
+        puts "Type the book number (1-30) to learn more details about a specific book giveaway."
         puts "Type quit any time you want to quit the program."
     end 
 
     def user_interaction
-        input = nil 
-        while input != "quit" 
-            input = gets.strip 
+        input = gets.strip 
             if input == "list"
                 list_giveaways 
             elsif input.to_i.between?(1,30)
-                input = current_book
+                input = self.current_book
                 find_book_by_number 
-                more_instructions 
-            elsif input == "author"
-                puts "Author name"
-            elsif input == "release date"
-                puts "Release Date"
-            elsif input == "details"
-                puts "Giveaway details and book summary"
+                self.current_book 
             elsif input == "quit"
                 quit 
             else 
@@ -66,24 +53,29 @@ class Goodreads::Controller
     end
 
     def find_book_by_number
-        input = nil 
-        while input != "quit"
-            input = gets.strip 
+        input = gets.strip 
+            if input == "1"
+                puts "1. Author name, release date, and details"
+            if input == "2"
+                puts "2. Author name, release date, and details"
+            if input == "3"
+                puts "3. Author name, release date, and details"
+            elsif input == "quit"
+                quit
+            else 
+                error_message
+            end
         end 
-
-    end 
-
-    def more_instructions
     end 
 
     def error_message
         puts "Sorry, I don't know what you're looking for! Please try again!"
-        user_interaction 
+        instructions 
     end 
 
     def quit 
         puts "You have quit the program. Goodbye!"  
-        quit 
+        # quit 
     end 
 
 end 

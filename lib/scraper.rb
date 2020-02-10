@@ -3,7 +3,6 @@ require 'open-uri'
 require 'nokogiri'
 
 class Goodreads::Scraper
-# class Scraper 
 
     def self.scrape_fiction_giveaway
         doc = Nokogiri::HTML(open("https://www.goodreads.com/giveaway/genre/Fiction"))
