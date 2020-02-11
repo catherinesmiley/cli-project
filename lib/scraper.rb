@@ -1,7 +1,3 @@
-require 'pry'
-require 'open-uri'
-require 'nokogiri'
-
 class Goodreads::Scraper
 
     def self.scrape_fiction_giveaway
@@ -12,8 +8,8 @@ class Goodreads::Scraper
             book_hash = {
                 :title => book.css("a.bookTitle").text,
                 :author => book.css("div.authorName__container a span").text,
-                :release_date => book.css("div.greyText.releaseDate").text,
-                :giveaway_details => book.css("div.giveawayDescriptionDetails span").text
+                :release_date => book.css("div.greyText.releaseDate").text.strip,
+                :giveaway_details => book.css("div.giveawayDescriptionDetails span").text.strip
             }
             books << book_hash
         end

@@ -38,3 +38,5 @@
             error_message
         end 
     end 
+
+    separate check input method

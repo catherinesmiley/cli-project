@@ -5,7 +5,7 @@ class Goodreads::Controller
     def run 
         create_books 
         welcome  
-        user_interaction
+        get_input
     end 
 
     def create_books 
@@ -24,15 +24,14 @@ class Goodreads::Controller
         puts "Type quit any time you want to quit the program."
     end 
 
-    def user_interaction
+    def get_input
         instructions 
         input = nil 
         while input != "quit"
         input = gets.strip 
             if input == "list"
                 list_giveaways 
-                find_book_by_number     
-                instructions    
+                find_book_by_number      
             elsif input == "quit"
                 quit_app
             else 
@@ -50,15 +49,18 @@ class Goodreads::Controller
         input = nil 
         while input != "quit"
         input = gets.strip 
-            if input.to_i <= Goodreads::Book.all.length
+            if input.to_i <= Goodreads::Book.all.length && input.to_i > 0
                 current_book = Goodreads::Book.all[input.to_i-1]
-                # current_book = Goodreads::Book.all[input.to_i]
                 puts "You selected the giveaway for #{current_book.title}:"
                 puts "Author: #{current_book.author}."
                 puts "#{current_book.release_date}."
                 puts "Giveaway Details: #{current_book.giveaway_details}."
+                instructions
             elsif input == "quit"
                 quit_app
+            elsif input == "list"
+                list_giveaways
+                find_book_by_number
             else 
                 error_message 
             end 
