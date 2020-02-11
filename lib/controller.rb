@@ -5,13 +5,11 @@ class Goodreads::Controller
     def run 
         create_books 
         welcome  
-        instructions 
+        # instructions 
         user_interaction
-        quit 
     end 
 
     def create_books 
-        binding.pry 
         book_array = Goodreads::Scraper.scrape_fiction_giveaway
         Goodreads::Book.create_from_site(book_array)
     end 
@@ -28,15 +26,16 @@ class Goodreads::Controller
     end 
 
     def user_interaction
+        instructions 
+        input = nil 
+        while input != "quit"
         input = gets.strip 
             if input == "list"
                 list_giveaways 
-            elsif input.to_i.between?(1,30)
-                input = self.current_book
                 find_book_by_number 
-                self.current_book 
+                instructions    
             elsif input == "quit"
-                quit 
+                quit_app
             else 
                 error_message
             end 
@@ -45,27 +44,29 @@ class Goodreads::Controller
 
     def list_giveaways
         puts "Here's the full list by book title:"
-        puts <<-DOC
-            1. The Orphan Collector
-            2. Above the Bay of Angels
-            3. Good Citizens Need Not Fear: Stories
-        DOC
+        Goodreads::Book.all.each.with_index(1) {|book, index| puts "#{index}. #{book.title}"}
     end
 
     def find_book_by_number
+        input = nil 
+        while input != "quit"
         input = gets.strip 
-            if input == "1"
-                puts "1. Author name, release date, and details"
-            if input == "2"
-                puts "2. Author name, release date, and details"
-            if input == "3"
-                puts "3. Author name, release date, and details"
+            if input.to_i <= Goodreads::Book.all.length 
+                current_book = Goodreads::Book.all[input.to_i-1]
+                puts "You selected the giveaway for #{current_book.title}:"
+                puts "Author: #{current_book.author}."
+                puts "#{current_book.release_date}."
+                puts "Giveaway Details: #{current_book.giveaway_details}."
             elsif input == "quit"
-                quit
+                quit_app
             else 
-                error_message
-            end
+                error_message 
+            end 
         end 
+    end 
+
+    def more_details 
+        puts "Author, Release Date, Giveaway Details"
     end 
 
     def error_message
@@ -73,7 +74,7 @@ class Goodreads::Controller
         instructions 
     end 
 
-    def quit 
+    def quit_app
         puts "You have quit the program. Goodbye!"  
         exit
     end 

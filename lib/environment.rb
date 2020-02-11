@@ -1,6 +1,6 @@
 require_relative "./goodreads/version"
 require 'pry'
-# require 'open-uri'
+require 'open-uri'
 require 'nokogiri'
 
 require_relative './book'

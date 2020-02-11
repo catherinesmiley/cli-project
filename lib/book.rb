@@ -11,7 +11,7 @@ class Goodreads::Book
         @@all << self 
     end 
 
-    def create_from_site(book_array)
+    def self.create_from_site(book_array)
         book_array.each do |book|
             self.new(book)
         end 
