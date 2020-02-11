@@ -5,7 +5,6 @@ class Goodreads::Controller
     def run 
         create_books 
         welcome  
-        # instructions 
         user_interaction
     end 
 
@@ -16,10 +15,10 @@ class Goodreads::Controller
 
     def welcome
         puts "Welcome to the Goodreads Fiction Giveaways App!"
+        puts "Discover all current fiction giveaways on Goodreads."
     end 
 
     def instructions 
-        puts "Discover all current fiction giveaways on Goodreads."
         puts "Type list for the full list of giveaways."
         puts "Type the book number (1-30) to learn more details about a specific book giveaway."
         puts "Type quit any time you want to quit the program."
@@ -32,7 +31,7 @@ class Goodreads::Controller
         input = gets.strip 
             if input == "list"
                 list_giveaways 
-                find_book_by_number 
+                find_book_by_number     
                 instructions    
             elsif input == "quit"
                 quit_app
@@ -51,8 +50,9 @@ class Goodreads::Controller
         input = nil 
         while input != "quit"
         input = gets.strip 
-            if input.to_i <= Goodreads::Book.all.length 
+            if input.to_i <= Goodreads::Book.all.length
                 current_book = Goodreads::Book.all[input.to_i-1]
+                # current_book = Goodreads::Book.all[input.to_i]
                 puts "You selected the giveaway for #{current_book.title}:"
                 puts "Author: #{current_book.author}."
                 puts "#{current_book.release_date}."
@@ -63,10 +63,6 @@ class Goodreads::Controller
                 error_message 
             end 
         end 
-    end 
-
-    def more_details 
-        puts "Author, Release Date, Giveaway Details"
     end 
 
     def error_message
