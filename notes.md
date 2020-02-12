@@ -155,3 +155,28 @@ class Goodreads::Controller
     end 
 
 end 
+
+
+    # def find_book_by_number
+    #     input = nil 
+    #     while input != "quit"
+    #     input = gets.strip 
+    #         if input.to_i <= Goodreads::Book.all.length && input.to_i > 0
+    #             self.current_book = Goodreads::Book.all[input.to_i-1]
+    #             puts "You selected the giveaway for #{current_book.title}:"
+    #             puts "Author: #{current_book.author}."
+    #             puts "#{current_book.release_date}."
+    #             puts "Giveaway Details: #{current_book.giveaway_details}."
+    #             instructions
+    #             # check_input
+    #         elsif input.downcase == "quit"
+    #             quit_app
+    #         elsif input.downcase == "list"
+    #             list_giveaways
+    #             instructions 
+    #             find_book_by_number
+    #         else 
+    #             error_message 
+    #         end 
+    #     end 
+    # end 

@@ -36,7 +36,13 @@ class Goodreads::Controller
             if input.downcase == "list"
                 list_giveaways 
                 instructions 
-                find_book_by_number  
+            elsif input.to_i <= Goodreads::Book.all.length && input.to_i > 0
+                self.current_book = Goodreads::Book.all[input.to_i-1]
+                puts "You selected the giveaway for #{current_book.title}:"
+                puts "Author: #{current_book.author}."
+                puts "#{current_book.release_date}."
+                puts "Giveaway Details: #{current_book.giveaway_details}."
+                instructions
             elsif input.downcase == "quit"
                 quit_app
             else 
@@ -49,41 +55,6 @@ class Goodreads::Controller
         puts "Here's the full list by book title:"
         Goodreads::Book.all.each.with_index(1) {|book, index| puts "#{index}. #{book.title}"}
     end
-
-    def find_book_by_number
-        input = nil 
-        while input != "quit"
-        input = gets.strip 
-            if input.to_i <= Goodreads::Book.all.length && input.to_i > 0
-                current_book = Goodreads::Book.all[input.to_i-1]
-                puts "You selected the giveaway for #{current_book.title}:"
-                puts "Author: #{current_book.author}."
-                puts "#{current_book.release_date}."
-                puts "Giveaway Details: #{current_book.giveaway_details}."
-                instructions
-                # check_input
-            elsif input.downcase == "quit"
-                quit_app
-            elsif input.downcase == "list"
-                list_giveaways
-                instructions 
-                find_book_by_number
-            else 
-                error_message 
-            end 
-        end 
-    end 
-
-    # def check_input
-    #     if input == "quit"
-    #         quit_app
-    #     elsif input == "list"
-    #         list_giveaways
-    #         find_book_by_number
-    #     else
-    #         error_message
-    #     end 
-    # end 
 
     def error_message
         puts "Sorry, I don't know what you're looking for! Please try again!"
