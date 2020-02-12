@@ -19,9 +19,13 @@ class Goodreads::Controller
     end 
 
     def instructions 
+        puts ""
+        puts "----------"
         puts "Type list for the full list of giveaways."
         puts "Type the book number (1-30) to learn more details about a specific book giveaway."
         puts "Type quit any time you want to quit the program."
+        puts "----------"
+        puts ""
     end 
 
     def get_input
@@ -29,10 +33,11 @@ class Goodreads::Controller
         input = nil 
         while input != "quit"
         input = gets.strip 
-            if input == "list"
+            if input.downcase == "list"
                 list_giveaways 
-                find_book_by_number      
-            elsif input == "quit"
+                instructions 
+                find_book_by_number  
+            elsif input.downcase == "quit"
                 quit_app
             else 
                 error_message
@@ -56,16 +61,29 @@ class Goodreads::Controller
                 puts "#{current_book.release_date}."
                 puts "Giveaway Details: #{current_book.giveaway_details}."
                 instructions
-            elsif input == "quit"
+                # check_input
+            elsif input.downcase == "quit"
                 quit_app
-            elsif input == "list"
+            elsif input.downcase == "list"
                 list_giveaways
+                instructions 
                 find_book_by_number
             else 
                 error_message 
             end 
         end 
     end 
+
+    # def check_input
+    #     if input == "quit"
+    #         quit_app
+    #     elsif input == "list"
+    #         list_giveaways
+    #         find_book_by_number
+    #     else
+    #         error_message
+    #     end 
+    # end 
 
     def error_message
         puts "Sorry, I don't know what you're looking for! Please try again!"
