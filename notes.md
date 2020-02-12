@@ -180,3 +180,10 @@ end
     #         end 
     #     end 
     # end 
+
+    don't need a while loop
+    allows me to call other methods
+    alternative - call get_input method again from inside get_input method
+    wouldn't even need to call instructions again
+    while loops can be a little bit riskier - possible to get stuck in infinite loops
+    
