@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Use this CLI app to view the most recent 30 giveaways for fiction novels on Goodreads! 
 
 ## Development
 
