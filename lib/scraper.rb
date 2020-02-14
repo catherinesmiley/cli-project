@@ -6,11 +6,12 @@ class Goodreads::Scraper
         details.map do |book|
             {
                 :title => book.css("a.bookTitle").text,
-                :author => book.css("div.authorName__container a span").text,
-                :release_date => book.css("div.greyText.releaseDate").text.strip,
+                :author => book.css("div.authorName__container a span").text.strip,
+                :release_date => book.css("div.greyText.releaseDate").text.split(": ")[-1],
                 :giveaway_details => book.css("div.giveawayDescriptionDetails span").text.strip
             }
         end
     end 
 
 end 
+

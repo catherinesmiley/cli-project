@@ -38,9 +38,12 @@ class Goodreads::Controller
                 instructions 
             elsif input.to_i <= Goodreads::Book.all.length && input.to_i > 0
                 self.current_book = Goodreads::Book.all[input.to_i-1]
-                puts "You selected the giveaway for #{current_book.title}:"
+                puts "You selected the giveaway for #{current_book.title}!"
+                puts ""
                 puts "Author: #{current_book.author}."
-                puts "#{current_book.release_date}."
+                puts "" 
+                puts "Release date: #{current_book.release_date}."
+                puts ""
                 puts "Giveaway Details: #{current_book.giveaway_details}."
                 instructions
             elsif input.downcase == "quit"
@@ -53,6 +56,7 @@ class Goodreads::Controller
 
     def list_giveaways
         puts "Here's the full list by book title:"
+        puts "" 
         Goodreads::Book.all.each.with_index(1) {|book, index| puts "#{index}. #{book.title}"}
     end
 
