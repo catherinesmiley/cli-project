@@ -1,27 +1,17 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
+class Goodreads::Scraper
 
-class Scraper
-
-    def self.scrape_page_categories
-        doc = Nokogiri::HTML(open("https://www.goodreads.com/choiceawards/best-books-2019"))
-        categories = []
-        # binding.pry 
-        details = doc.css("div.clearFix")
-        binding.pry 
-        details.each do |category|
-            category_hash = {
-                :name => category.css("a h4.category__copy").text,
-                :url => category.css("a").attribute("href").value,
-                :winner_image => category.css("div.category__winnerImageContainer img").attribute("src").value 
+    def self.scrape_fiction_giveaway
+        doc = Nokogiri::HTML(open("https://www.goodreads.com/giveaway/genre/Fiction"))
+        details = doc.css("ul.list li.listElement.giveawayListItem div.giveawayPreviewBookContainer div.description.descriptionContainer")
+        details.map do |book|
+            {
+                :title => book.css("a.bookTitle").text,
+                :author => book.css("div.authorName__container a span").text.strip,
+                :release_date => book.css("div.greyText.releaseDate").text.split(": ")[-1],
+                :giveaway_details => book.css("div.giveawayDescriptionDetails span").text.strip
             }
-        end 
-
-        category_hash
-
+        end
     end 
 
-    self.scrape_page_categories 
-
 end 
+
