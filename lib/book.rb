@@ -11,11 +11,11 @@ class Goodreads::Book
         @@all << self 
     end 
 
-    def self.create_from_site(book_array)
-        book_array.each do |book|
-            self.new(book)
+        def self.create_from_site(book_array)
+            book_array.each do |book|
+                self.new(book)
+            end 
         end 
-    end 
 
     def self.all 
         @@all 
