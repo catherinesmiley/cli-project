@@ -14,11 +14,11 @@ You can also clone this repo with SSH or HTTPS from https://github.com/catherine
 
 ## Usage
 
-Use this CLI app to view the most recent 30 giveaways for fiction novels on Goodreads! 
+Use this CLI app to view the most recent 30 giveaways for fiction novels on Goodreads! Run `bin/run` to run the program.
 
 ## Development
 
-You can run `bin/console` for an interactive prompt that will allow you to experiment. Run `bin/run` to run the program!
+You can run `bin/console` for an interactive prompt that will allow you to experiment. 
 
 ## Contributing
 
