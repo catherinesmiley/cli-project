@@ -8,7 +8,7 @@ class Goodreads::Scraper
                 :title => book.css("a.bookTitle").text,
                 :author => book.css("div.authorName__container a span").text.strip,
                 :release_date => book.css("div.greyText.releaseDate").text.split(": ")[-1],
-                :giveaway_details => book.css("div.giveawayDescriptionDetails span").text.strip
+                :giveaway_details => book.css("div.giveawayDescriptionDetails span:nth-child(2)").text.strip
             }
         end
     end 
