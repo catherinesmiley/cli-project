@@ -14,7 +14,7 @@ class Goodreads::Controller
     end 
 
     def welcome
-        puts "Welcome to the Goodreads Fiction Giveaways App!"
+        puts "Welcome to the Goodreads Fiction Giveaways Program!"
         puts "Discover all current fiction giveaways on Goodreads."
     end 
 
